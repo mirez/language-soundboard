@@ -113,7 +113,7 @@
   #wordsGrid, #arabicGrid, #catalanGrid {
     height: 100%;
     align-content: start;
-    grid-auto-rows: minmax(142px, 1fr);
+    grid-auto-rows: auto;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
@@ -125,7 +125,7 @@
   #arabicGrid::-webkit-scrollbar,
   #catalanGrid::-webkit-scrollbar { display: none; }
 
-  .pad, .card {
+  .card {
     border: none;
     border-radius: 28px;
     display: flex;
@@ -143,17 +143,39 @@
     -webkit-user-select: none;
   }
 
-  .pad:active, .card:active {
+  .card:active {
     transform: translateY(6px) scale(0.97);
     box-shadow: 0 2px 0 rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.10);
   }
 
-  .pad .emoji, .card .emoji {
+  .card .emoji {
     font-size: clamp(38px, 6vw, 60px);
     margin-bottom: 6px;
   }
 
-  .card { padding: 10px 12px; }
+  .card { padding: 10px 12px; min-height: 142px; }
+
+  /* full-width divider so long lists are skimmable */
+  .section-head {
+    grid-column: 1 / -1;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(15px, 2.2vw, 21px);
+    color: var(--ink-plum);
+    opacity: 0.65;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 4px 0;
+  }
+  .section-head::after {
+    content: "";
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.25;
+  }
 
   .card .es-word {
     font-size: clamp(16px, 2.6vw, 26px);
@@ -213,7 +235,6 @@
     white-space: nowrap;
     box-shadow: 0 4px 0 rgba(0,0,0,0.08);
   }
-  nav button.active.sounds  { background: var(--sky-splash); }
   nav button.active.words   { background: var(--meadow); }
   nav button.active.arabic  { background: var(--marigold); }
   nav button.active.catalan { background: var(--coral-pop); }
@@ -234,14 +255,12 @@
   </header>
 
   <main>
-    <div class="grid hidden" id="soundsGrid"></div>
     <div class="grid" id="wordsGrid"></div>
     <div class="grid hidden" id="arabicGrid"></div>
     <div class="grid hidden" id="catalanGrid"></div>
   </main>
 
   <nav>
-    <button id="tabSounds" class="sounds"><span class="icon">🎵</span> Sounds</button>
     <button id="tabWords" class="active words"><span class="icon">🇪🇸</span> Spanish</button>
     <button id="tabArabic" class="arabic"><span class="icon">🇲🇦</span> Arabic</button>
     <button id="tabCatalan" class="catalan"><span class="icon">🏰</span> Català</button>
@@ -251,26 +270,14 @@
 <script>
 /* ============================================================
    CUSTOMIZE HERE. Nothing below this block needs to change
-   for basic edits: colors, words, and sounds all live in these
-   two arrays.
+   for basic edits: all the words live in the three arrays below.
    ============================================================ */
-
-// Musical pads. type "tone" plays a generated note (no files needed).
-// To use a real recorded sound instead, change an entry to:
-//   { emoji: "🐶", label: "Woof", type: "file", src: "sounds/dog.mp3", color: "var(--coral-pop)" }
-// const SOUND_PADS = [
-//   { emoji: "🐤", label: "Do",  type: "tone", freq: 261.6, color: "var(--coral-pop)" },
-//   { emoji: "🐸", label: "Re",  type: "tone", freq: 293.7, color: "var(--marigold)" },
-//   { emoji: "🦋", label: "Mi",  type: "tone", freq: 329.6, color: "var(--sky-splash)" },
-//   { emoji: "🐳", label: "Fa",  type: "tone", freq: 349.2, color: "var(--meadow)" },
-//   { emoji: "🦄", label: "Sol", type: "tone", freq: 392.0, color: "var(--coral-pop)" },
-//   { emoji: "🐢", label: "La",  type: "tone", freq: 440.0, color: "var(--marigold)" },
-// ];
 
 // Spanish vocabulary cards. Tap once to hear the Spanish word,
 // tap again to also hear the English word.
 const VOCAB_WORDS = [
   // Friendly greetings & polite words — the first things she'll want to say
+  { section: "👋 Hello & Manners" },
   { emoji: "👋", es: "hola",      en: "hello"      },
   { emoji: "😊", es: "gracias",   en: "thank you"  },
   { emoji: "🙏", es: "por favor", en: "please"     },
@@ -282,6 +289,7 @@ const VOCAB_WORDS = [
 
   // The big trip — Vermont 🚗 Montreal ✈️ Marrakech,
   // then Málaga, Madrid, Valencia & Barcelona
+  { section: "✈️ Our Trip" },
   { emoji: "🇺🇸", es: "Estados Unidos", en: "United States" },
   { emoji: "🇨🇦", es: "Canadá",    en: "Canada"     },
   { emoji: "🇲🇦", es: "Marruecos", en: "Morocco"    },
@@ -291,11 +299,13 @@ const VOCAB_WORDS = [
   { emoji: "🌘", es: "eclipse",   en: "eclipse"    }, // total eclipse crosses Spain Aug 12, 2026!
 
   // Around town
+  { section: "🏛️ Around Town" },
   { emoji: "🏛️", es: "museo",    en: "museum"     },
   { emoji: "🌳", es: "parque",    en: "park"       },
   { emoji: "🍽️", es: "restaurante", en: "restaurant" },
 
   // Beach & vacation — Spain's costas and Morocco's coast
+  { section: "🏖️ Beach & Pool" },
   { emoji: "🏖️", es: "playa",    en: "beach"      },
   { emoji: "🌊", es: "mar",       en: "sea"        },
   { emoji: "☀️", es: "sol",       en: "sun"        },
@@ -308,6 +318,7 @@ const VOCAB_WORDS = [
   { emoji: "🕌", es: "mezquita",  en: "mosque"     },
 
   // Spanish culture — things she'll see, taste & hear
+  { section: "💃 Spanish Things" },
   { emoji: "🥘", es: "paella",    en: "paella"     }, // born in Valencia!
   { emoji: "🍩", es: "churros",   en: "churros"    },
   { emoji: "🫒", es: "tapas",     en: "tapas"      },
@@ -315,6 +326,7 @@ const VOCAB_WORDS = [
   { emoji: "🎉", es: "fiesta",    en: "party"      },
 
   // Animals she might meet — camels in Morocco!
+  { section: "🐫 Animals" },
   { emoji: "🐫", es: "camello",   en: "camel"      },
   { emoji: "🐱", es: "gato",      en: "cat"        },
   { emoji: "🐶", es: "perro",     en: "dog"        },
@@ -324,6 +336,7 @@ const VOCAB_WORDS = [
   { emoji: "🦄", es: "unicornio", en: "unicorn"    },
 
   // Yummy snacks & drinks for a hot summer
+  { section: "🍦 Food & Treats" },
   { emoji: "🍦", es: "helado",    en: "ice cream"  },
   { emoji: "🍧", es: "polo",      en: "popsicle"   }, // that's what they call it in Spain
   { emoji: "🍚", es: "arroz",     en: "rice"       },
@@ -339,6 +352,7 @@ const VOCAB_WORDS = [
   { emoji: "🥛", es: "leche",     en: "milk"       },
 
   // Family & everyday things
+  { section: "🏠 Family & Things" },
   { emoji: "👩", es: "madre",      en: "mother"        },
   { emoji: "👨", es: "padre",      en: "father"        },
   { emoji: "👨", es: "papí",      en: "dad"        },
@@ -352,6 +366,30 @@ const VOCAB_WORDS = [
   { emoji: "🌸", es: "flor",      en: "flower"     },
   { emoji: "⭐", es: "estrella",  en: "star"       },
   { emoji: "🌙", es: "luna",      en: "moon"       },
+
+  // Counting 1-10
+  { section: "🔢 Counting" },
+  { emoji: "1️⃣", es: "uno",     en: "one"        },
+  { emoji: "2️⃣", es: "dos",     en: "two"        },
+  { emoji: "3️⃣", es: "tres",    en: "three"      },
+  { emoji: "4️⃣", es: "cuatro",  en: "four"       },
+  { emoji: "5️⃣", es: "cinco",   en: "five"       },
+  { emoji: "6️⃣", es: "seis",    en: "six"        },
+  { emoji: "7️⃣", es: "siete",   en: "seven"      },
+  { emoji: "8️⃣", es: "ocho",    en: "eight"      },
+  { emoji: "9️⃣", es: "nueve",   en: "nine"       },
+  { emoji: "🔟", es: "diez",     en: "ten"        },
+
+  // Putting numbers to work — real things she can order & say
+  { section: "🗣️ Using Numbers" },
+  { emoji: "🙋", es: "tengo seis años",        en: "I'm six years old"  },
+  { emoji: "🍽️", es: "mesa para tres",        en: "table for three"    },
+  { emoji: "👨‍👩‍👧", es: "somos siete",          en: "party of seven"    },
+  { emoji: "☕", es: "dos cafés, por favor",   en: "two coffees please" },
+  { emoji: "🍦", es: "un helado, por favor",   en: "one ice cream please" },
+  { emoji: "🎟️", es: "cuatro billetes",       en: "four tickets"       },
+  { emoji: "❓", es: "¿cuántos?",              en: "how many?"          },
+  { emoji: "💶", es: "¿cuánto cuesta?",        en: "how much is it?"    },
 ];
 
 // Moroccan Arabic (Darija) — natural phrases the way people actually
@@ -359,6 +397,7 @@ const VOCAB_WORDS = [
 // voice speaks the Arabic script.
 const ARABIC_WORDS = [
   // Greetings & big-hearted manners — Moroccans melt when kids use these
+  { section: "👋 Hello & Manners" },
   { emoji: "👋", tr: "salam alaykum", ar: "السلام عليكم", en: "hello"         },
   { emoji: "😊", tr: "shukran bzzaf", ar: "شكرا بزاف",    en: "thanks a lot!" },
   { emoji: "🙏", tr: "afak",          ar: "عافاك",        en: "please"        },
@@ -370,6 +409,7 @@ const ARABIC_WORDS = [
   { emoji: "🤲", tr: "bismillah",     ar: "بسم الله",      en: "let's eat!"    }, // said before meals
 
   // Resort life
+  { section: "🏖️ Resort & Food" },
   { emoji: "💦", tr: "piscine",  ar: "البيسين",  en: "pool"       }, // Moroccans use the French word
   { emoji: "🔥", tr: "skhoun",   ar: "سخون",     en: "hot!"       },
   { emoji: "🍬", tr: "halwa",    ar: "حلوى",     en: "candy"      },
@@ -378,6 +418,7 @@ const ARABIC_WORDS = [
   { emoji: "🥖", tr: "khobz",    ar: "خبز",      en: "bread"      },
 
   // Magical Marrakech — henna, kaftans & mint tea
+  { section: "✨ Magical Marrakech" },
   { emoji: "🖐️", tr: "henna",   ar: "الحناء",  en: "henna"     }, // she'll get her hands painted!
   { emoji: "👸", tr: "amira",    ar: "أميرة",   en: "princess"  },
   { emoji: "✨", tr: "zwina",    ar: "زوينة",   en: "pretty"    },
@@ -387,12 +428,36 @@ const ARABIC_WORDS = [
   { emoji: "🍛", tr: "kseksu",   ar: "كسكس",    en: "couscous"  },
   { emoji: "🛍️", tr: "souk",    ar: "سوق",     en: "market"    },
   { emoji: "🐫", tr: "jmel",     ar: "جمل",     en: "camel"     },
+
+  // Counting 1-10 in Darija — note "jouj" for 2, not the textbook "ithnayn"
+  { section: "🔢 Counting" },
+  { emoji: "1️⃣", tr: "wahed",   ar: "واحد",    en: "one"       },
+  { emoji: "2️⃣", tr: "jouj",    ar: "جوج",     en: "two"       },
+  { emoji: "3️⃣", tr: "tlata",   ar: "تلاتة",   en: "three"     },
+  { emoji: "4️⃣", tr: "rebaa",   ar: "ربعة",    en: "four"      },
+  { emoji: "5️⃣", tr: "khamsa",  ar: "خمسة",    en: "five"      },
+  { emoji: "6️⃣", tr: "setta",   ar: "ستة",     en: "six"       },
+  { emoji: "7️⃣", tr: "sebaa",   ar: "سبعة",    en: "seven"     },
+  { emoji: "8️⃣", tr: "tmenya",  ar: "تمنية",   en: "eight"     },
+  { emoji: "9️⃣", tr: "tesoud",  ar: "تسعود",   en: "nine"      },
+  { emoji: "🔟", tr: "achra",    ar: "عشرة",    en: "ten"       },
+
+  // Putting numbers to work
+  { section: "🗣️ Using Numbers" },
+  { emoji: "🙋", tr: "andi setta snin",   ar: "عندي ستة سنين",  en: "I'm six years old"  },
+  { emoji: "👨‍👩‍👧", tr: "hna tlata",      ar: "حنا تلاتة",       en: "we are three"       },
+  { emoji: "🍽️", tr: "hna sebaa",        ar: "حنا سبعة",        en: "party of seven"     },
+  { emoji: "🍵", tr: "jouj atay afak",    ar: "جوج أتاي عافاك",  en: "two mint teas please" },
+  { emoji: "☕", tr: "jouj qahwa afak",   ar: "جوج قهوة عافاك",  en: "two coffees please" },
+  { emoji: "🥖", tr: "wahed khobz afak",  ar: "واحد خبز عافاك",  en: "one bread please"   },
+  { emoji: "💰", tr: "shhal?",            ar: "شحال؟",           en: "how much?"          },
 ];
 
 // Catalan — what they actually speak in Barcelona and Valencia.
 // Saying "bon dia" instead of "buenos días" delights people there.
 const CATALAN_WORDS = [
   // Greetings & manners
+  { section: "👋 Hello & Manners" },
   { emoji: "👋", ca: "hola",          en: "hello"       },
   { emoji: "☀️", ca: "bon dia",       en: "good morning" },
   { emoji: "😊", ca: "gràcies",       en: "thank you"   },
@@ -404,6 +469,7 @@ const CATALAN_WORDS = [
   { emoji: "💤", ca: "la migdiada",   en: "nap"         },
 
   // Catalan culture — the magic of Barcelona
+  { section: "🐉 Barcelona Magic" },
   { emoji: "🏰", ca: "Sagrada Família", en: "the big church" },
   { emoji: "🤸", ca: "castells",     en: "human towers" }, // kids climb to the top!
   { emoji: "🐉", ca: "drac",         en: "dragon"      },  // Gaudí's Park Güell + Sant Jordi
@@ -414,6 +480,7 @@ const CATALAN_WORDS = [
   { emoji: "🍮", ca: "crema catalana",  en: "custard"  },
 
   // Places & travel
+  { section: "✈️ Places & Travel" },
   { emoji: "🇪🇸", ca: "Espanya",     en: "Spain"       },
   { emoji: "🏴", ca: "Catalunya",    en: "Catalonia"   },
   { emoji: "✈️", ca: "avió",         en: "airplane"    },
@@ -423,6 +490,7 @@ const CATALAN_WORDS = [
   { emoji: "🍽️", ca: "restaurant",  en: "restaurant"  },
 
   // Beach & pool
+  { section: "🏖️ Beach & Pool" },
   { emoji: "🏖️", ca: "platja",      en: "beach"       },
   { emoji: "🌊", ca: "mar",          en: "sea"         },
   { emoji: "☀️", ca: "sol",          en: "sun"         },
@@ -432,6 +500,7 @@ const CATALAN_WORDS = [
   { emoji: "⛵", ca: "vaixell",      en: "boat"        },
 
   // Snacks & drinks
+  { section: "🍦 Food & Treats" },
   { emoji: "🍦", ca: "gelat",        en: "ice cream"   },
   { emoji: "🍧", ca: "polo",         en: "popsicle"    },
   { emoji: "💧", ca: "aigua",        en: "water"       },
@@ -446,6 +515,7 @@ const CATALAN_WORDS = [
   { emoji: "🥛", ca: "llet",         en: "milk"        },
 
   // Animals
+  { section: "🦋 Animals" },
   { emoji: "🐱", ca: "gat",          en: "cat"         },
   { emoji: "🐶", ca: "gos",          en: "dog"         },
   { emoji: "🦋", ca: "papallona",    en: "butterfly"   },
@@ -454,6 +524,7 @@ const CATALAN_WORDS = [
   { emoji: "🦄", ca: "unicorn",      en: "unicorn"     },
 
   // Family & everyday things
+  { section: "🏠 Family & Things" },
   { emoji: "👩", ca: "mare",         en: "mother"      },
   { emoji: "👨", ca: "pare",         en: "father"      },
   { emoji: "👧", ca: "nena",         en: "girl"        },
@@ -466,36 +537,35 @@ const CATALAN_WORDS = [
   { emoji: "🌸", ca: "flor",         en: "flower"      },
   { emoji: "⭐", ca: "estrella",     en: "star"        },
   { emoji: "🌙", ca: "lluna",        en: "moon"        },
+
+  // Counting 1-10
+  { section: "🔢 Counting" },
+  { emoji: "1️⃣", ca: "un",          en: "one"         },
+  { emoji: "2️⃣", ca: "dos",         en: "two"         },
+  { emoji: "3️⃣", ca: "tres",        en: "three"       },
+  { emoji: "4️⃣", ca: "quatre",      en: "four"        },
+  { emoji: "5️⃣", ca: "cinc",        en: "five"        },
+  { emoji: "6️⃣", ca: "sis",         en: "six"         },
+  { emoji: "7️⃣", ca: "set",         en: "seven"       },
+  { emoji: "8️⃣", ca: "vuit",        en: "eight"       },
+  { emoji: "9️⃣", ca: "nou",         en: "nine"        },
+  { emoji: "🔟", ca: "deu",          en: "ten"         },
+
+  // Putting numbers to work
+  { section: "🗣️ Using Numbers" },
+  { emoji: "🙋", ca: "tinc sis anys",          en: "I'm six years old"    },
+  { emoji: "🍽️", ca: "taula per a tres",      en: "table for three"      },
+  { emoji: "👨‍👩‍👧", ca: "som set",              en: "party of seven"      },
+  { emoji: "☕", ca: "dos cafès, si us plau",  en: "two coffees please"   },
+  { emoji: "🍦", ca: "un gelat, si us plau",   en: "one ice cream please" },
+  { emoji: "🎟️", ca: "quatre entrades",       en: "four tickets"         },
+  { emoji: "❓", ca: "quants?",                en: "how many?"            },
+  { emoji: "💶", ca: "quant costa?",           en: "how much is it?"      },
 ];
 
 /* ============================================================
    App logic below
    ============================================================ */
-
-let audioCtx = null;
-function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  // iOS/iPadOS often creates the context suspended — resume inside the tap
-  if (audioCtx.state === "suspended") audioCtx.resume();
-  return audioCtx;
-}
-
-function playTone(freq) {
-  const ctx = getAudioCtx();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = "sine";
-  osc.frequency.value = freq;
-  gain.gain.setValueAtTime(0.25, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-  osc.connect(gain).connect(ctx.destination);
-  osc.start();
-  osc.stop(ctx.currentTime + 0.6);
-}
-
-function playFile(src) {
-  new Audio(src).play();
-}
 
 // Speaking speed toggle: 0.5 = half speed (slow), 1.0 = full speed
 let speechRate = 0.5;
@@ -575,27 +645,20 @@ function burstSparkles(el) {
   }
 }
 
-function buildSoundsGrid() {
-  const grid = document.getElementById("soundsGrid");
-  SOUND_PADS.forEach(pad => {
-    const btn = document.createElement("button");
-    btn.className = "pad";
-    btn.style.background = pad.color;
-    btn.innerHTML = `<div class="emoji">${pad.emoji}</div><div>${pad.label}</div>`;
-    btn.addEventListener("pointerdown", () => {
-      if (pad.type === "file") playFile(pad.src); else playTone(pad.freq);
-      burstSparkles(btn);
-    });
-    grid.appendChild(btn);
-  });
-}
-
 // Shared builder for vocab tabs. Each card shows the foreign word with
 // its English below; tap once to hear the foreign word, again for English.
 // cards: { emoji, word (shown on card), say (text for TTS), lang, en }
 function buildVocabGrid(gridId, cards, color) {
   const grid = document.getElementById(gridId);
   cards.forEach(card => {
+    // { section: "..." } entries render as a full-width heading, not a card
+    if (card.section) {
+      const head = document.createElement("div");
+      head.className = "section-head";
+      head.textContent = card.section;
+      grid.appendChild(head);
+      return;
+    }
     const btn = document.createElement("button");
     btn.className = "card";
     btn.style.background = color;
@@ -617,7 +680,6 @@ function buildVocabGrid(gridId, cards, color) {
 }
 
 const TABS = {
-  // sounds:  { grid: "soundsGrid", btn: "tabSounds", title: "Play Sounds" },
   spanish: { grid: "wordsGrid",  btn: "tabWords",  title: "Spanish Words" },
   arabic:  { grid: "arabicGrid", btn: "tabArabic", title: "Moroccan Words" },
   catalan: { grid: "catalanGrid", btn: "tabCatalan", title: "Catalan Words" },
@@ -631,7 +693,6 @@ function showTab(tab) {
   document.getElementById("pageTitle").textContent = TABS[tab].title;
 }
 
-document.getElementById("tabSounds").addEventListener("click", () => showTab("sounds"));
 document.getElementById("tabWords").addEventListener("click", () => showTab("spanish"));
 document.getElementById("tabArabic").addEventListener("click", () => showTab("arabic"));
 document.getElementById("tabCatalan").addEventListener("click", () => showTab("catalan"));
@@ -646,16 +707,17 @@ speedToggle.addEventListener("click", () => {
   speedToggle.querySelector(".speed-label").textContent = fast ? "Fast" : "Slow";
 });
 
-buildSoundsGrid();
+// Section markers pass straight through; word entries get normalized.
+const toCards = (list, wordKey, sayKey, lang) =>
+  list.map(w => w.section ? w
+    : { emoji: w.emoji, word: w[wordKey], say: w[sayKey], lang, en: w.en });
+
 buildVocabGrid("wordsGrid",
-  VOCAB_WORDS.map(w => ({ emoji: w.emoji, word: w.es, say: w.es, lang: "es-ES", en: w.en })),
-  "var(--sky-splash)");
+  toCards(VOCAB_WORDS, "es", "es", "es-ES"), "var(--sky-splash)");
 buildVocabGrid("arabicGrid",
-  ARABIC_WORDS.map(w => ({ emoji: w.emoji, word: w.tr, say: w.ar, lang: "ar-SA", en: w.en })),
-  "var(--meadow)");
+  toCards(ARABIC_WORDS, "tr", "ar", "ar-SA"), "var(--meadow)");
 buildVocabGrid("catalanGrid",
-  CATALAN_WORDS.map(w => ({ emoji: w.emoji, word: w.ca, say: w.ca, lang: "ca-ES", en: w.en })),
-  "var(--coral-pop)");
+  toCards(CATALAN_WORDS, "ca", "ca", "ca-ES"), "var(--coral-pop)");
 showTab("spanish"); // Spanish Words is the default tab
 
 // Register service worker so it keeps working with wifi off
