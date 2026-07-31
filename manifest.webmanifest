@@ -1,0 +1,12 @@
+{
+  "name": "Learning Pad",
+  "short_name": "Learning Pad",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#FFF8EC",
+  "theme_color": "#FFB84C",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

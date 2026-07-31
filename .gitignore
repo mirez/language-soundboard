@@ -1,0 +1,29 @@
+# General macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon files (custom folder icons)
+Icon?
+
+# Thumbnails and filesystem metadata
+._*
+
+# Files that may be created at the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotbackup
+
+# Directories potentially created by the Finder
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+apdisk
+
+.claude/
+
