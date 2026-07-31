@@ -646,35 +646,44 @@ function pickVoice(lang) {
   return null;
 }
 
-// iOS only allows speech that starts from a completed tap, and the very
-// first speak() unlocks the engine — so prime it once on the first touch.
-let speechPrimed = false;
-function primeSpeech() {
-  if (speechPrimed || !("speechSynthesis" in window)) return;
-  speechPrimed = true;
-  refreshVoices();
-  const u = new SpeechSynthesisUtterance(" ");
-  u.volume = 0;
-  window.speechSynthesis.speak(u);
-}
-document.addEventListener("touchend", primeSpeech, { once: true, capture: true });
-document.addEventListener("click", primeSpeech, { once: true, capture: true });
+// Load voices on first touch. We deliberately do NOT speak a silent
+// "priming" utterance here: iOS often never fires `end` on one, which
+// leaves the queue stuck `pending` and makes every later tap take the
+// cancel path below. The first real card tap unlocks the engine fine.
+document.addEventListener("touchend", refreshVoices, { once: true, capture: true });
+document.addEventListener("click", refreshVoices, { once: true, capture: true });
 
-let currentUtter = null; // hold a reference — Safari can GC it mid-speech and go silent
+let currentUtter = null;  // keep a reference — Safari can GC it mid-speech and go silent
+let speakTimer = null;
 
 function speak(text, lang) {
   if (!("speechSynthesis" in window)) return;
   const synth = window.speechSynthesis;
-  if (synth.speaking || synth.pending) synth.cancel();
+
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = lang;
   const v = pickVoice(lang);
   if (v) utter.voice = v;
   utter.rate = speechRate;
+  utter.onend = utter.onerror = () => { currentUtter = null; };
   currentUtter = utter;
-  synth.speak(utter);
-  // iOS sometimes leaves the queue paused after a cancel()
-  if (synth.paused) synth.resume();
+
+  clearTimeout(speakTimer);
+  if (synth.speaking || synth.pending) {
+    // Interrupting: cancel() and speak() in the SAME tick wedges iOS silent
+    // until reload, so let the cancel settle for a beat first. Safe here
+    // because the engine is already unlocked (it's mid-sentence).
+    synth.cancel();
+    speakTimer = setTimeout(() => {
+      synth.speak(utter);
+      if (synth.paused) synth.resume();
+    }, 120);
+  } else {
+    // Nothing playing: speak straight from the tap so iOS counts the
+    // gesture and unlocks the engine on the very first card.
+    synth.speak(utter);
+    if (synth.paused) synth.resume();
+  }
 }
 
 function burstSparkles(el) {
