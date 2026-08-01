@@ -286,12 +286,17 @@ const VOCAB_WORDS = [
   // Friendly greetings & polite words — the first things she'll want to say
   { section: "👋 Hello & Manners" },
   { emoji: "👋", es: "hola",      en: "hello"      },
-  { emoji: "🤝", es: "¿qué tal?", en: "how's it going?" }, // friendlier than "¿cómo estás?"
-  { emoji: "😄", es: "muy bien, ¿y tú?", en: "great, and you?" }, // always hand the question back
-  { emoji: "🙋", es: "encantada", en: "nice to meet you" }, // -a ending: what a girl says
+  { emoji: "👋", es: "muy buenas", en: "hello (anytime)" }, // super local, works all day
+  { emoji: "🤝", es: "¿qué tal?", en: "how's it going?" }, 
+  { emoji: "😄", es: "muy bien, ¿y tú?", en: "great, and you?" }, 
+  { emoji: "🙋", es: "encantada", en: "nice to meet you" }, 
   { emoji: "😊", es: "gracias",   en: "thank you"  },
-  { emoji: "🙏", es: "por favor", en: "please"     },
-  { emoji: "👋", es: "adiós",     en: "goodbye"    },
+  { emoji: "🙏", es: "por fa",    en: "please (casual)" }, // very natural for kids
+  { emoji: "🙏", es: "por favor", en: "please (formal)"     },
+  { emoji: "Excuse me", es: "perdona", en: "excuse me" }, // perfect for getting past someone
+  { emoji: "👌", es: "vale",      en: "okay"       }, // the most spoken word in Spain!
+  { emoji: "😎", es: "¡qué guay!", en: "how cool!"  }, // kids say this constantly
+  { emoji: "👋", es: "hasta luego", en: "see you later" }, // far more common than adiós
   { emoji: "😴", es: "buenas noches", en: "good night" },
   { emoji: "😋", es: "tengo hambre", en: "I'm hungry" },
   { emoji: "🥱", es: "estoy cansada", en: "I'm tired" },
@@ -300,13 +305,13 @@ const VOCAB_WORDS = [
   // Who we are — the questions everyone asks a visiting kid
   { section: "🙋 About Me & My Family" },
   { emoji: "🏷️", es: "me llamo...",          en: "my name is..."      },
-  { emoji: "🇺🇸", es: "soy americana",       en: "I'm American"       }, // what people actually say
-  { emoji: "🗽", es: "soy estadounidense",   en: "I'm from the USA"   }, // the formal word
+  { emoji: "🇺🇸", es: "soy americana",       en: "I'm American"       }, 
+  { emoji: "🗽", es: "soy estadounidense",   en: "I'm from the USA"   }, 
   { emoji: "🍁", es: "soy de Vermont",       en: "I'm from Vermont"   },
   { emoji: "🏡", es: "vivo en Estados Unidos", en: "I live in the USA" },
   { emoji: "🧳", es: "estamos de vacaciones", en: "we're on vacation" },
-  { emoji: "👩", es: "esta es mi madre",     en: "this is my mom"     },
-  { emoji: "👨", es: "este es mi padre",     en: "this is my dad"     },
+  { emoji: "👩", es: "esta es mi abuela",    en: "this is my grandma" }, // useful for extended family
+  { emoji: "👨‍👨‍👧", es: "estos son mis papás", en: "these are my dads"    },
   { emoji: "🗣️", es: "hablo un poco de español", en: "I speak a little Spanish" },
   { emoji: "🤔", es: "no entiendo",          en: "I don't understand" },
   { emoji: "❓", es: "¿hablas inglés?",      en: "do you speak English?" },
@@ -320,7 +325,7 @@ const VOCAB_WORDS = [
   { emoji: "🇪🇸", es: "España",    en: "Spain"      },
   { emoji: "✈️", es: "avión",     en: "airplane"   },
   { emoji: "🚂", es: "tren",      en: "train"      },
-  { emoji: "🌘", es: "eclipse",   en: "eclipse"    }, // total eclipse crosses Spain Aug 12, 2026!
+  { emoji: "🌘", es: "eclipse",   en: "eclipse"    }, 
 
   // Around town
   { section: "🏛️ Around Town" },
@@ -343,7 +348,7 @@ const VOCAB_WORDS = [
 
   // Spanish culture — things she'll see, taste & hear
   { section: "💃 Spanish Things" },
-  { emoji: "🥘", es: "paella",    en: "paella"     }, // born in Valencia!
+  { emoji: "🥘", es: "paella",    en: "paella"     }, 
   { emoji: "🍩", es: "churros",   en: "churros"    },
   { emoji: "🫒", es: "tapas",     en: "tapas"      },
   { emoji: "💃", es: "flamenco",  en: "flamenco"   },
@@ -362,7 +367,7 @@ const VOCAB_WORDS = [
   // Yummy snacks & drinks for a hot summer
   { section: "🍦 Food & Treats" },
   { emoji: "🍦", es: "helado",    en: "ice cream"  },
-  { emoji: "🍧", es: "polo",      en: "popsicle"   }, // that's what they call it in Spain
+  { emoji: "🍧", es: "polo",      en: "popsicle"   }, 
   { emoji: "🍚", es: "arroz",     en: "rice"       },
   { emoji: "🍕", es: "pizza",     en: "pizza"      },
   { emoji: "💧", es: "agua",      en: "water"      },
@@ -374,12 +379,12 @@ const VOCAB_WORDS = [
   { emoji: "🍪", es: "galleta",   en: "cookie"     },
   { emoji: "🥖", es: "pan",       en: "bread"      },
   { emoji: "🥛", es: "leche",     en: "milk"       },
+  { emoji: "😋", es: "¡qué rico!", en: "how delicious!" }, // great compliment to chefs
 
   // Family & everyday things
   { section: "🏠 Family & Things" },
-  { emoji: "👩", es: "madre",      en: "mother"        },
-  { emoji: "👨", es: "padre",      en: "father"        },
-  { emoji: "👨", es: "papí",      en: "dad"        },
+  { emoji: "👨", es: "papi",      en: "daddy"      },
+  { emoji: "👨", es: "papá",      en: "dad"        },
   { emoji: "👧", es: "niña",      en: "girl"       },
   { emoji: "🏠", es: "casa",      en: "house"      },
   { emoji: "📚", es: "libro",     en: "book"       },
@@ -408,10 +413,10 @@ const VOCAB_WORDS = [
   { section: "🗣️ Using Numbers" },
   { emoji: "🙋", es: "tengo seis años",        en: "I'm six years old"  },
   { emoji: "🍽️", es: "mesa para tres",        en: "table for three"    },
-  { emoji: "👨‍👩‍👧", es: "somos siete",          en: "party of seven"    },
+  { emoji: "👨‍👨‍👧", es: "somos tres",          en: "party of three"    },
   { emoji: "☕", es: "dos cafés, por favor",   en: "two coffees please" },
   { emoji: "🍦", es: "un helado, por favor",   en: "one ice cream please" },
-  { emoji: "🎟️", es: "cuatro billetes",       en: "four tickets"       },
+  { emoji: "🎟️", es: "tres billetes",       en: "three tickets"       },
   { emoji: "❓", es: "¿cuántos?",              en: "how many?"          },
   { emoji: "💶", es: "¿cuánto cuesta?",        en: "how much is it?"    },
 ];
@@ -423,19 +428,18 @@ const ARABIC_WORDS = [
   // Greetings & big-hearted manners — Moroccans melt when kids use these
   { section: "👋 Hello & Manners" },
   { emoji: "👋", tr: "salam alaykum", ar: "السلام عليكم", en: "hello"         },
-  // You MUST return the greeting — mirroring it back is basic politeness
   { emoji: "🤲", tr: "wa alaykum salam", ar: "وعليكم السلام", en: "hello back!" },
-  { emoji: "🤝", tr: "labas?",        ar: "لاباس؟",        en: "how are you?"  }, // the Moroccan way, works for anyone
-  { emoji: "😄", tr: "labas, lhamdullah", ar: "لاباس، الحمد لله", en: "good, thanks!" }, // "lhamdullah" is near-automatic here
+  { emoji: "🤝", tr: "labas?",        ar: "لاباس؟",        en: "how are you?"  }, 
+  { emoji: "😄", tr: "labas, lhamdullah", ar: "لاباس، الحمد لله", en: "good, thanks!" }, 
   { emoji: "🙂", tr: "bikhir",        ar: "بخير",          en: "I'm well"      },
   { emoji: "😊", tr: "shukran bzzaf", ar: "شكرا بزاف",    en: "thanks a lot!" },
   { emoji: "🙏", tr: "afak",          ar: "عافاك",        en: "please"        },
-  { emoji: "🙅", tr: "la shukran",    ar: "لا شكرا",      en: "no, thank you" }, // magic words in the souk
+  { emoji: "🙅", tr: "la shukran",    ar: "لا شكرا",      en: "no, thank you" }, 
   { emoji: "👍", tr: "wakha",         ar: "واخا",          en: "okay!"         },
   { emoji: "✅", tr: "iyeh",          ar: "إيه",           en: "yes"           },
   { emoji: "❌", tr: "la",            ar: "لا",            en: "no"            },
   { emoji: "👋", tr: "bslama",        ar: "بسلامة",        en: "bye bye"       },
-  { emoji: "🤲", tr: "bismillah",     ar: "بسم الله",      en: "let's eat!"    }, // said before meals
+  { emoji: "🤲", tr: "bismillah",     ar: "بسم الله",      en: "let's eat!"    }, 
 
   // Who we are — "amrikiya" is the feminine form, correct for a girl
   { section: "🙋 About Me & My Family" },
@@ -443,25 +447,26 @@ const ARABIC_WORDS = [
   { emoji: "🇺🇸", tr: "ana amrikiya",    ar: "أنا أمريكية",     en: "I'm American"     },
   { emoji: "🍁", tr: "ana men Vermont",  ar: "أنا من فيرمونت",  en: "I'm from Vermont" },
   { emoji: "🗽", tr: "ana men Amrika",   ar: "أنا من أمريكا",   en: "I'm from America" },
-  { emoji: "👩", tr: "hadi mama",        ar: "هادي ماما",       en: "this is my mom"   },
-  { emoji: "👨", tr: "hada baba",        ar: "هادا بابا",       en: "this is my dad"   },
+  { emoji: "👨‍👨‍👧", tr: "hadu walidiya",   ar: "هادو واليديا",    en: "these are my parents" },
   { emoji: "🤔", tr: "ma fhemtsh",       ar: "ما فهمتش",        en: "I don't understand" },
   { emoji: "❓", tr: "wash kathdar nglizia?", ar: "واش كتهضر نݣليزية؟", en: "do you speak English?" },
 
   // Resort life
   { section: "🏖️ Resort & Food" },
-  { emoji: "💦", tr: "piscine",  ar: "البيسين",  en: "pool"       }, // Moroccans use the French word
+  { emoji: "💦", tr: "piscine",  ar: "البيسين",  en: "pool"       }, 
   { emoji: "🔥", tr: "skhoun",   ar: "سخون",     en: "hot!"       },
   { emoji: "🍬", tr: "halwa",    ar: "حلوى",     en: "candy"      },
   { emoji: "🍽️", tr: "ristoran", ar: "ريستوران", en: "restaurant" },
   { emoji: "💧", tr: "l'ma",     ar: "الما",     en: "water"      },
   { emoji: "🥖", tr: "khobz",    ar: "خبز",      en: "bread"      },
+  { emoji: "😋", tr: "bnin!",    ar: "بنين",     en: "delicious!" }, // massive compliment to cooks
 
   // Magical Marrakech — henna, kaftans & mint tea
   { section: "✨ Magical Marrakech" },
-  { emoji: "🖐️", tr: "henna",   ar: "الحناء",  en: "henna"     }, // she'll get her hands painted!
+  { emoji: "🖐️", tr: "henna",   ar: "الحناء",  en: "henna"     }, 
   { emoji: "👸", tr: "amira",    ar: "أميرة",   en: "princess"  },
   { emoji: "✨", tr: "zwina",    ar: "زوينة",   en: "pretty"    },
+  { emoji: "🥰", tr: "zwin bzzaf", ar: "زوين بزاف", en: "very nice!" }, // useful for complimenting almost anything
   { emoji: "👗", tr: "caftan",   ar: "قفطان",   en: "kaftan"    },
   { emoji: "🍵", tr: "atay",     ar: "أتاي",    en: "mint tea"  },
   { emoji: "🍲", tr: "tajine",   ar: "طاجين",   en: "tagine"    },
@@ -469,7 +474,7 @@ const ARABIC_WORDS = [
   { emoji: "🛍️", tr: "souk",    ar: "سوق",     en: "market"    },
   { emoji: "🐫", tr: "jmel",     ar: "جمل",     en: "camel"     },
 
-  // Counting 1-10 in Darija — note "jouj" for 2, not the textbook "ithnayn"
+  // Counting 1-10 in Darija
   { section: "🔢 Counting" },
   { emoji: "1️⃣", tr: "wahed",   ar: "واحد",    en: "one"       },
   { emoji: "2️⃣", tr: "jouj",    ar: "جوج",     en: "two"       },
@@ -485,8 +490,7 @@ const ARABIC_WORDS = [
   // Putting numbers to work
   { section: "🗣️ Using Numbers" },
   { emoji: "🙋", tr: "andi setta snin",   ar: "عندي ستة سنين",  en: "I'm six years old"  },
-  { emoji: "👨‍👩‍👧", tr: "hna tlata",      ar: "حنا تلاتة",       en: "we are three"       },
-  { emoji: "🍽️", tr: "hna sebaa",        ar: "حنا سبعة",        en: "party of seven"     },
+  { emoji: "👨‍👨‍👧", tr: "hna tlata",      ar: "حنا تلاتة",       en: "we are three"       },
   { emoji: "🍵", tr: "jouj atay afak",    ar: "جوج أتاي عافاك",  en: "two mint teas please" },
   { emoji: "☕", tr: "jouj qahwa afak",   ar: "جوج قهوة عافاك",  en: "two coffees please" },
   { emoji: "🥖", tr: "wahed khobz afak",  ar: "واحد خبز عافاك",  en: "one bread please"   },
@@ -503,23 +507,25 @@ const CATALAN_WORDS = [
   { emoji: "🤝", ca: "com va?",       en: "how's it going?" },
   { emoji: "😄", ca: "molt bé, i tu?", en: "great, and you?" },
   { emoji: "🙋", ca: "encantada",     en: "nice to meet you" },
-  { emoji: "😊", ca: "gràcies",       en: "thank you"   },
+  { emoji: "😊", ca: "merci",         en: "thanks (casual)" }, // incredibly common in Catalonia
+  { emoji: "😊", ca: "moltes gràcies", en: "thank you very much" },
   { emoji: "🙏", ca: "si us plau",    en: "please"      },
+  { emoji: "👌", ca: "d'acord",       en: "okay"        },
   { emoji: "👋", ca: "adéu",          en: "goodbye"     },
+  { emoji: "👋", ca: "fins ara",      en: "see you soon" },
   { emoji: "😴", ca: "bona nit",      en: "good night"  },
   { emoji: "😋", ca: "tinc gana",     en: "I'm hungry"  },
   { emoji: "🥱", ca: "estic cansada", en: "I'm tired"   },
   { emoji: "💤", ca: "la migdiada",   en: "nap"         },
 
-  // Who we are — "parlo una mica de català" delights people here
+  // Who we are
   { section: "🙋 About Me & My Family" },
   { emoji: "🏷️", ca: "em dic...",             en: "my name is..."      },
   { emoji: "🇺🇸", ca: "soc americana",        en: "I'm American"       },
   { emoji: "🗽", ca: "soc dels Estats Units", en: "I'm from the USA"   },
   { emoji: "🍁", ca: "soc de Vermont",        en: "I'm from Vermont"   },
   { emoji: "🧳", ca: "estem de vacances",     en: "we're on vacation"  },
-  { emoji: "👩", ca: "aquesta és la meva mare", en: "this is my mom"   },
-  { emoji: "👨", ca: "aquest és el meu pare",   en: "this is my dad"   },
+  { emoji: "👨‍👨‍👧", ca: "aquests són els meus pares", en: "these are my parents" },
   { emoji: "🗣️", ca: "parlo una mica de català", en: "I speak a little Catalan" },
   { emoji: "🤔", ca: "no ho entenc",          en: "I don't understand" },
   { emoji: "❓", ca: "parles anglès?",        en: "do you speak English?" },
@@ -527,13 +533,14 @@ const CATALAN_WORDS = [
   // Catalan culture — the magic of Barcelona
   { section: "🐉 Barcelona Magic" },
   { emoji: "🏰", ca: "Sagrada Família", en: "the big church" },
-  { emoji: "🤸", ca: "castells",     en: "human towers" }, // kids climb to the top!
-  { emoji: "🐉", ca: "drac",         en: "dragon"      },  // Gaudí's Park Güell + Sant Jordi
+  { emoji: "🤸", ca: "castells",     en: "human towers" }, 
+  { emoji: "🐉", ca: "drac",         en: "dragon"      },  
   { emoji: "🎨", ca: "mosaic",       en: "mosaic"      },
   { emoji: "💃", ca: "sardana",      en: "circle dance" },
-  { emoji: "🌹", ca: "rosa",         en: "rose"        },  // Sant Jordi's roses
+  { emoji: "🌹", ca: "rosa",         en: "rose"        },  
   { emoji: "🍅", ca: "pa amb tomàquet", en: "tomato bread" },
   { emoji: "🍮", ca: "crema catalana",  en: "custard"  },
+  { emoji: "😋", ca: "bon profit",   en: "enjoy your meal!" }, // polite local staple at restaurants
 
   // Places & travel
   { section: "✈️ Places & Travel" },
@@ -581,8 +588,7 @@ const CATALAN_WORDS = [
 
   // Family & everyday things
   { section: "🏠 Family & Things" },
-  { emoji: "👩", ca: "mare",         en: "mother"      },
-  { emoji: "👨", ca: "pare",         en: "father"      },
+  { emoji: "👨", ca: "pare",         en: "dad"      },
   { emoji: "👧", ca: "nena",         en: "girl"        },
   { emoji: "🏠", ca: "casa",         en: "house"       },
   { emoji: "📚", ca: "llibre",       en: "book"        },
@@ -611,10 +617,10 @@ const CATALAN_WORDS = [
   { section: "🗣️ Using Numbers" },
   { emoji: "🙋", ca: "tinc sis anys",          en: "I'm six years old"    },
   { emoji: "🍽️", ca: "taula per a tres",      en: "table for three"      },
-  { emoji: "👨‍👩‍👧", ca: "som set",              en: "party of seven"      },
+  { emoji: "👨‍👨‍👧", ca: "som tres",              en: "party of three"      },
   { emoji: "☕", ca: "dos cafès, si us plau",  en: "two coffees please"   },
   { emoji: "🍦", ca: "un gelat, si us plau",   en: "one ice cream please" },
-  { emoji: "🎟️", ca: "quatre entrades",       en: "four tickets"         },
+  { emoji: "🎟️", ca: "tres entrades",       en: "three tickets"         },
   { emoji: "❓", ca: "quants?",                en: "how many?"            },
   { emoji: "💶", ca: "quant costa?",           en: "how much is it?"      },
 ];
