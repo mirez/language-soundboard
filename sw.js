@@ -1,5 +1,5 @@
 // Bump this when you change index.html so devices pick up the new version
-const CACHE_NAME = "learning-pad-v7";
+const CACHE_NAME = "learning-pad-v8";
 const ASSETS = [
   "./",
   "./index.html",
