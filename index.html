@@ -273,7 +273,6 @@
     <button id="tabCatalan" class="catalan"><span class="icon">🏰</span> Català</button>
   </nav>
 </div>
-
 <script>
 /* ============================================================
    CUSTOMIZE HERE. Nothing below this block needs to change
@@ -293,7 +292,7 @@ const VOCAB_WORDS = [
   { emoji: "😊", es: "gracias",   en: "thank you"  },
   { emoji: "🙏", es: "por fa",    en: "please (casual)" }, // very natural for kids
   { emoji: "🙏", es: "por favor", en: "please (formal)"     },
-  { emoji: "Excuse me", es: "perdona", en: "excuse me" }, // perfect for getting past someone
+  { emoji: "🙇", es: "perdona",   en: "excuse me" }, // perfect for getting past someone
   { emoji: "👌", es: "vale",      en: "okay"       }, // the most spoken word in Spain!
   { emoji: "😎", es: "¡qué guay!", en: "how cool!"  }, // kids say this constantly
   { emoji: "👋", es: "hasta luego", en: "see you later" }, // far more common than adiós
@@ -325,6 +324,25 @@ const VOCAB_WORDS = [
   { emoji: "🐟", es: "pescado y calamares sí, sin problema", en: "fish and squid are fine" },
   { emoji: "❓", es: "¿lleva gambas?",        en: "does it have shrimp?" },
   { emoji: "🚫", es: "sin gambas, por favor", en: "no shrimp, please"    },
+
+  // ADULT SECTION. Refrigerated injectables at airport X-ray and at station
+  // scanners (Atocha, Sants, ONCF). Every phrase here is deliberately
+  // gender-neutral and says nothing about who the second vial belongs to:
+  // "de mi familia" is true, closes the topic, and needs no follow-up.
+  { section: "🛂 Airport & Security" },
+  { emoji: "💊", es: "es medicina con receta",            en: "it's prescription medicine" },
+  { emoji: "🧊", es: "necesita refrigeración",            en: "it needs refrigeration" },
+  { emoji: "🧊", es: "es medicación en frío",             en: "it's medication kept cold" },
+  { emoji: "🧴", es: "esto es gel frío para la medicina", en: "this is cold gel for the medicine" },
+  { emoji: "🎒", es: "¿la saco de la maleta?",            en: "should I take it out of the bag?" },
+  { emoji: "🛄", es: "¿la pongo en una bandeja aparte?",  en: "should I put it in a separate tray?" },
+  { emoji: "💉", es: "es un inyectable, tipo insulina",   en: "it's an injectable, like insulin" },
+  { emoji: "📄", es: "aquí está la receta",               en: "here is the prescription" },
+  { emoji: "🏷️", es: "la etiqueta lleva mi nombre",      en: "the label has my name" },
+  { emoji: "👨‍👩‍👧", es: "son recetas de mi familia",       en: "they're my family's prescriptions" },
+  { emoji: "🧊", es: "la nevera portátil es para la medicación", en: "the cooler is for the medication" },
+  { emoji: "🙋", es: "¿puede revisarlo a mano?",          en: "can you inspect it by hand?" },
+  { emoji: "🙏", es: "gracias por su ayuda",              en: "thank you for your help" },
 
   // The big trip — Vermont 🚗 Montreal ✈️ Marrakech,
   // then Málaga, Madrid, Valencia & Barcelona
@@ -434,6 +452,10 @@ const VOCAB_WORDS = [
 // Moroccan Arabic (Darija) — natural phrases the way people actually
 // say them in Marrakech. Cards show the sound-it-out spelling; the
 // voice speaks the Arabic script.
+//
+// NOTE: this array is the "Morocco" tab, not the "Arabic" tab. The French
+// security block near the bottom of the Darija sections carries
+// lang: "fr-FR" and ltr: true so the speak function can switch voices.
 const ARABIC_WORDS = [
   // Greetings & big-hearted manners — Moroccans melt when kids use these
   { section: "👋 Hello & Manners" },
@@ -470,6 +492,40 @@ const ARABIC_WORDS = [
   { emoji: "🐟", tr: "lhout labas",   ar: "الحوت لاباس",     en: "fish is fine"        },
   { emoji: "❓", tr: "wash fih lqamroun?", ar: "واش فيه القمرون؟", en: "does it have shrimp?" },
   { emoji: "🚫", tr: "bla qamroun afak",  ar: "بلا قمرون عافاك",  en: "no shrimp, please"   },
+
+  // ADULT SECTION. Darija for guards, hotel staff and ONCF station scanners.
+  // "dyal l'a'ila" (for the family) is the neutral way to cover two names.
+  { section: "🛂 Airport & Security" },
+  { emoji: "💊", tr: "hada dwa b l'ordonnance",  ar: "هادا دوا بالأوردونونس",   en: "this is prescription medicine" },
+  { emoji: "🧊", tr: "khassou ybqa bared",       ar: "خاصو يبقى بارد",          en: "it has to stay cold" },
+  { emoji: "🧴", tr: "hada jel bared dyal dwa",  ar: "هادا جيل بارد ديال الدوا", en: "this is cold gel for the medicine" },
+  { emoji: "🎒", tr: "wash khass nkharrjo?",     ar: "واش خاص نخرجو؟",          en: "do I need to take it out?" },
+  { emoji: "🛄", tr: "wash nhettou wahdo?",      ar: "واش نحطو وحدو؟",          en: "should I put it separately?" },
+  { emoji: "💉", tr: "hada dwa dyal l'ibra, bhal l'insuline", ar: "هادا دوا ديال الإبرة، بحال الأنسولين", en: "it's an injection, like insulin" },
+  { emoji: "📄", tr: "hadi hiya l'ordonnance",   ar: "هادي هي الأوردونونس",     en: "here is the prescription" },
+  { emoji: "🏷️", tr: "smiti kayna f l'etiquette", ar: "سميتي كاينة فالإتيكيت",  en: "my name is on the label" },
+  { emoji: "👨‍👩‍👧", tr: "hadu dwayat dyal l'a'ila", ar: "هادو دوايات ديال العائلة", en: "these are the family's medicines" },
+  { emoji: "🙏", tr: "barak Allah fik",          ar: "بارك الله فيك",           en: "thank you kindly" },
+
+  // FRENCH. Menara airport security, police aux frontières and any pharmacy
+  // or clinic run their official business in French. Darija earns goodwill;
+  // French is what actually resolves a medical question. Each card carries
+  // lang: "fr-FR" (voice) and ltr: true (so the text renders left-to-right
+  // even if the Arabic column is styled RTL). The "ar" field holds the real
+  // French sentence; "tr" is the sound-it-out.
+  { section: "🇫🇷 Security in French" },
+  { emoji: "💊", tr: "sest uhn may-dee-kah-MAHN sur or-doh-NANCE", ar: "C'est un médicament sur ordonnance.", en: "it's prescription medication", lang: "fr-FR", ltr: true },
+  { emoji: "🧊", tr: "eel dwah res-TAY oh FRAY",                   ar: "Il doit rester au frais.",           en: "it must stay cold",            lang: "fr-FR", ltr: true },
+  { emoji: "🧴", tr: "sest duh lah GLASS poor luh may-dee-kah-MAHN", ar: "C'est de la glace pour le médicament.", en: "this is ice for the medication", lang: "fr-FR", ltr: true },
+  { emoji: "🎒", tr: "zhuh dwah luh sor-TEER dew SAK",             ar: "Je dois le sortir du sac ?",         en: "should I take it out of the bag?", lang: "fr-FR", ltr: true },
+  { emoji: "🛄", tr: "zhuh luh MEH dahn zuhn bak ah PAR",          ar: "Je le mets dans un bac à part ?",    en: "shall I put it in a separate tray?", lang: "fr-FR", ltr: true },
+  { emoji: "💉", tr: "sest uhn an-zhek-TAHBL, kom lan-sew-LEEN",   ar: "C'est un injectable, comme l'insuline.", en: "it's an injectable, like insulin", lang: "fr-FR", ltr: true },
+  { emoji: "📄", tr: "vwah-SEE lor-doh-NANCE",                     ar: "Voici l'ordonnance.",                en: "here is the prescription",     lang: "fr-FR", ltr: true },
+  { emoji: "🏷️", tr: "lay-tee-KET port mohn NOHN",                ar: "L'étiquette porte mon nom.",         en: "the label has my name",        lang: "fr-FR", ltr: true },
+  { emoji: "👨‍👩‍👧", tr: "suh sohn lay zor-doh-NANCE duh mah fah-MEEY", ar: "Ce sont les ordonnances de ma famille.", en: "these are my family's prescriptions", lang: "fr-FR", ltr: true },
+  { emoji: "🧊", tr: "sest ewn glah-SYEHR poor lay may-dee-kah-MAHN", ar: "C'est une glacière pour les médicaments.", en: "it's a cooler for the medication", lang: "fr-FR", ltr: true },
+  { emoji: "🙋", tr: "voo poo-VAY luh kohn-troh-LAY ah lah MAN",    ar: "Vous pouvez le contrôler à la main ?", en: "can you check it by hand?",  lang: "fr-FR", ltr: true },
+  { emoji: "🙏", tr: "mair-SEE boh-KOO duh votr ED",               ar: "Merci beaucoup de votre aide.",      en: "thank you for your help",      lang: "fr-FR", ltr: true },
 
   // Resort life
   { section: "🏖️ Resort & Food" },
@@ -558,6 +614,23 @@ const CATALAN_WORDS = [
   { emoji: "🐟", ca: "peix i calamars sí, cap problema", en: "fish and squid are fine" },
   { emoji: "❓", ca: "porta gambes?",         en: "does it have shrimp?" },
   { emoji: "🚫", ca: "sense gambes, si us plau", en: "no shrimp, please" },
+
+  // ADULT SECTION. For Sants, Barcelona airport and Rodalies bag checks.
+  // Castilian works everywhere in Catalonia, so this set exists mostly for
+  // parity; same neutral framing on the second prescription.
+  { section: "🛂 Airport & Security" },
+  { emoji: "💊", ca: "és medicació amb recepta",          en: "it's prescription medicine" },
+  { emoji: "🧊", ca: "necessita refrigeració",            en: "it needs refrigeration" },
+  { emoji: "🧴", ca: "això és gel fred per a la medicació", en: "this is cold gel for the medication" },
+  { emoji: "🎒", ca: "l'he de treure de la maleta?",      en: "should I take it out of the bag?" },
+  { emoji: "🛄", ca: "ho poso en una safata a part?",     en: "shall I put it in a separate tray?" },
+  { emoji: "💉", ca: "és un injectable, tipus insulina",  en: "it's an injectable, like insulin" },
+  { emoji: "📄", ca: "aquí té la recepta",                en: "here is the prescription" },
+  { emoji: "🏷️", ca: "l'etiqueta porta el meu nom",      en: "the label has my name" },
+  { emoji: "👨‍👩‍👧", ca: "són receptes de la meva família", en: "they're my family's prescriptions" },
+  { emoji: "🧊", ca: "la nevera portàtil és per a la medicació", en: "the cooler is for the medication" },
+  { emoji: "🙋", ca: "ho pot revisar a mà?",              en: "can you inspect it by hand?" },
+  { emoji: "🙏", ca: "gràcies per la seva ajuda",         en: "thank you for your help" },
 
   // Catalan culture — the magic of Barcelona
   { section: "🐉 Barcelona Magic" },
